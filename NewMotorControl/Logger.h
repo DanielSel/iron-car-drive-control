@@ -1,5 +1,7 @@
 #pragma once
+
 #include "Arduino.h"
+
 #include "SerialInterface.h"
 
 #define LOG Logger
@@ -29,14 +31,14 @@ public:
 
 private:
 	static Logger* INSTANCE();
-	static void LOG_MESSAGE(int logLevel, String Message);
+	static void LOG_MESSAGE(int logLevel, String message);
 	
 	boolean initialized;
 	int logLevel;
 
 	Logger();
 	void initialize(int logLevel);
-	void logMessage(int logLevel, String Message);
+	void logMessage(int logLevel, String message);
 };
 
 }

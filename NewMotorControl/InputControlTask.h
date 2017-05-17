@@ -1,5 +1,5 @@
 #pragma once
-#include "Arduino.h"
+
 #include "Task.h"
 #include "SerialInterface.h"
 #include "MotorControl.h"

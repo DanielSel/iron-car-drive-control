@@ -10,10 +10,14 @@
 #include "SerialInterface.h"
 #include "MotorControl.h"
 
-// Tasks
+// Tasks & Interrupts
 #include "InputControlTask.h"
 
+
 using namespace motorcontrol;
+
+// PIN Definitions
+#define MOTOR_PWM_PIN 11
 
 // Task Definitions
 // TODO: List/Vector implementation for Arduino
@@ -24,7 +28,9 @@ Task* inputControlTask;
 void setup() {
 	LOG::INITIALIZE(LOG_LEVEL_DEBUG);
 	SerialInterface::initialize(19200);
-	MotorControl* motorControl = new MotorControl();
+
+	pinMode(MOTOR_PWM_PIN, OUTPUT);
+	MotorControl* motorControl = new MotorControl(MOTOR_PWM_PIN);
 
 	inputControlTask = new InputControlTask(motorControl);
 }

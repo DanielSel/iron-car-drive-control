@@ -1,0 +1,9 @@
+Motor
+neutral: 1500
+vollgas: 2025 (2035)
+rückwärts: 955 (945)
+
+Servo
+neutral: 1500
+rechts: 2100
+links: 900

@@ -15,6 +15,7 @@ void SerialInterface::initialize(int baudrate)
 
 bool SerialInterface::isMessageAvailable()
 {
+	LOG::TRACE("Available bytes on Serial Channel: " + static_cast<String>(Serial.available()));
 	bool available = Serial.available() > 0;
 	if (available)
 	{

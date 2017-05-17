@@ -16,6 +16,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="OLD_PWMSignalCode.ino" />
+    <None Include="EmergencyBrake.ino" />
+    <None Include="MiniDisplay.ino" />
+    <None Include="MotorAndSteering.ino" />
+    <None Include="SerialCommunication.ino" />
   </ItemGroup>
- 
+  <ItemGroup>
+    <ClInclude Include="__vm\.OLD_PWMSignalCode.vsarduino.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>

@@ -1,0 +1,51 @@
+Documentation Notes:
+
+--------------------------------------------------
+Wiring
+--------------------------------------------------
+RC -> Arduino
+GND -> GND (Grey Cable soldered to Violet cable )
+5V -> 5V (Grey Cable)
+Servo (1CH) -> Pin D11 (Green Cable)
+Motor (2CH) -> Pin D12 (Blue Cable)
+
+Arduino -> Servo
+GND -> GND (Red Cable)
+5V -> 5V (Black Cable)
+Pind D09 -> Servo Input
+
+
+Arduino -> Motor
+Pin D10 -> ESC (Lonely Blue Cable)
+[ESC gets power from Battery and forwards to RC, which in turn forwards to Arduino]
+
+--------------------------------------------------
+Serial Communication Protocol
+--------------------------------------------------
+
+Message Format: <ControlCode>:<ControlValue>;
+Example: 1:1600; (Set Power of 1600 to Motor -> Slow Forward Movement)
+
+Table of Codes and Values:
+--------------------------
+Control Code        Min Value        Neutral Value        Max Value        Description
+0                   0                0                    0                Reset the Controller State -> Sets Motor and Servo back to Neutral. Example: 0:0;
+1                   955              1500                 2025             Set Power to MOTOR: < 1500 means Reverse. For Full Power Braking, send 955 while the car is moving forward. This will not damage the suspension. NOTE: DOES NOT WORK WHEN REVERSING. DO NOT TRY EMERGENCY BRAKING WHILE GOING REVERSE OR YOU WILL DAMAGE THE CAR!
+2                   900              1500                 2100             Set Steering Angle: Min = Full Left, Max = Full Right
+
+
+--------------------------------------------------
+Input Control
+--------------------------------------------------
+* Reacts to Control Messages from User with 5Hz (every 200ms)
+* Reacts to Remote Control with 50Hz (every 20ms)
+* Obeys Input Control Messages over Serial Interface as long as there is no / neutral input signal from RC.
+* If RC is used it overrides User Input until RESET command is sent.
+
+--------------------------------------------------
+Internal Details
+--------------------------------------------------
+* Uses Servo Library to generate 50Hz PWM Signal (Arduino's analogWrite generates a 590Hz signal)
+* Uses EnableInterrupt Library for PinChangeInterrupts on RC Input Pins to decode the PWM Signal
+* Currently NO input validation -> You can crash it by sending malformed command messages
+* Basic Logging to Serial Channel. Configured in setup() method in main .ino file. Set Log Level as Desired. Possible Values: CRITICAL, ERROR, WARNING, INFO, DEBUG, TRACE.

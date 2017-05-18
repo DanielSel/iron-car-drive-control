@@ -4,7 +4,7 @@ using namespace motorcontrol;
 InputControlTask::InputControlTask(MotorControl* motorControl, SteeringControl* steeringControl)
 {
 	this->motorControl = motorControl;
-  this->steeringControl = steeringControl;
+	this->steeringControl = steeringControl;
 }
 
 

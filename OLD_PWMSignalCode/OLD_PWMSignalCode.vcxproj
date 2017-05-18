@@ -93,7 +93,7 @@
   </ImportGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties VM.DebugTextMessages.MessageWindow="1" VM.DebugTextMessages.SerialWindow="1" debug.view.FreeMemory="1" debug.view.AnalogPins="1" arduino.build.auto_discover_includes="0" arduino.upload.port="COM4" debug.view.DigitalPins="1" />
+      <UserProperties VM.DebugTextMessages.MessageWindow="1" VM.DebugTextMessages.SerialWindow="1" debug.view.FreeMemory="" debug.view.AnalogPins="" arduino.build.auto_discover_includes="0" arduino.upload.port="COM3" debug.view.DigitalPins="" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

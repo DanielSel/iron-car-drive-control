@@ -16,8 +16,10 @@ public:
 	~InputControlTask();
 
 	void execute() override;
+	void setOverride(boolean active);
 
 private:
+	boolean overrideFlag;
 	MotorControl* motorControl;
 	SteeringControl* steeringControl;
 };

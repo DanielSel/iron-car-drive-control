@@ -10,7 +10,7 @@ class Task
 public:
 	Task();
 	Task(int interval);
-	virtual ~Task();
+	~Task();
 
 	void loop(int currentTime);
 

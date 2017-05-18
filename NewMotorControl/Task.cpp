@@ -27,3 +27,7 @@ void Task::loop(int currentTime)
 		execute();
 	}
 }
+
+void Task::execute()
+{
+}

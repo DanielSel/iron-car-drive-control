@@ -27,9 +27,6 @@
     <ClInclude Include="Task.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="InputControlTask.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="MotorControl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -45,15 +42,18 @@
     <ClInclude Include="ReadPwmInterrupt.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="RcInputControlTask.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SerialInputControlTask.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SerialInterface.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Task.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="InputControlTask.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MotorControl.cpp">
@@ -66,6 +66,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ReadPwmInterrupt.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RcInputControlTask.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SerialInputControlTask.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

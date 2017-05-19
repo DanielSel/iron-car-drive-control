@@ -9,6 +9,7 @@ namespace motorcontrol
 const int MOTOR_PWM_VALUE_MAX = 2025;
 const int MOTOR_PWM_VALUE_MIN = 955;
 const int MOTOR_PWM_VALUE_NEUTRAL = 1500;
+const int MOTOR_PWM_VALUE_NOSIGNAL = 0;
 
 class MotorControl
 {

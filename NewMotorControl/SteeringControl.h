@@ -9,6 +9,7 @@ namespace motorcontrol
 const int STEERING_PWM_VALUE_MAX = 2100;
 const int STEERING_PWM_VALUE_MIN = 900;
 const int STEERING_PWM_VALUE_NEUTRAL = 1500;
+const int STEERING_PWM_VALUE_NOSIGNAL = 0;
 
 class SteeringControl
 {

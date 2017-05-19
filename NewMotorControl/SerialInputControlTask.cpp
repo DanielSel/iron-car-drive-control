@@ -1,18 +1,22 @@
-#include "InputControlTask.h"
+#include "SerialInputControlTask.h"
 using namespace motorcontrol;
 
-InputControlTask::InputControlTask(MotorControl* motorControl, SteeringControl* steeringControl)
+
+SerialInputControlTask::SerialInputControlTask(MotorControl* motorControl, SteeringControl* steeringControl) : SerialInputControlTask(TASK_DEFAULT_INTERVAL_MS, motorControl, steeringControl)
+{
+}
+
+SerialInputControlTask::SerialInputControlTask(int interval, MotorControl* motorControl, SteeringControl* steeringControl) : Task(interval)
 {
 	this->motorControl = motorControl;
 	this->steeringControl = steeringControl;
 }
 
-
-InputControlTask::~InputControlTask()
+SerialInputControlTask::~SerialInputControlTask()
 {
 }
 
-void InputControlTask::execute()
+void SerialInputControlTask::execute()
 {
 	LOG::TRACE("Executing Input Control Task...");
 	if (SerialInterface::isMessageAvailable())
@@ -50,7 +54,7 @@ void InputControlTask::execute()
 	}
 }
 
-void InputControlTask::setOverride(boolean active)
+void SerialInputControlTask::setOverride(boolean active)
 {
 	overrideFlag = active;
 }

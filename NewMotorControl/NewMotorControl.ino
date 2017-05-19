@@ -17,7 +17,8 @@
 
 // Tasks & Interrupts
 #include "Task.h"
-#include "InputControlTask.h"
+#include "SerialInputControlTask.h"
+#include "RcInputControlTask.h"
 #include "ReadPwmInterrupt.h"
 
 
@@ -30,7 +31,9 @@ using namespace motorcontrol;
 #define STEERING_OUTPUT_PIN 9
 
 // Task Definitions
-InputControlTask* inputControlTask;
+SerialInputControlTask* serialInputControlTask;
+RcInputControlTask* rcInputControlTask;
+
 
 // Interrupt Definitions
 ReadPwmInterrupt* readRcMotorPwm;
@@ -57,8 +60,9 @@ void setup() {
 	MotorControl* motorControl = new MotorControl(MOTOR_OUTPUT_PIN);
 	SteeringControl* steeringControl = new SteeringControl(STEERING_OUTPUT_PIN);
 
-	// Create Input Control Task
-	inputControlTask = new InputControlTask(motorControl, steeringControl);
+	// Create Input Control Tasks
+	serialInputControlTask = new SerialInputControlTask(200, motorControl, steeringControl);
+	rcInputControlTask = new RcInputControlTask(&rcMotorPwmValue, &rcSteeringPwmValue, 20, motorControl, steeringControl, serialInputControlTask);
 
 	// Attach PWM Interrupts
 	readRcMotorPwm = new ReadPwmInterrupt(RC_INPUT_MOTOR_PIN, &rcMotorPwmValue);
@@ -68,7 +72,8 @@ void setup() {
 // the loop function runs over and over again until power down or reset
 void loop() {
 	int time = millis();
-	inputControlTask->loop(time);
+	serialInputControlTask->loop(time);
+	rcInputControlTask->loop(time);
 	debugLoop(time);
 }
 

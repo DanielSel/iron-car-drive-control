@@ -83,9 +83,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ControlMessage.h" />
-    <ClInclude Include="InputControlTask.h" />
+    <ClInclude Include="SerialInputControlTask.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="MotorControl.h" />
+    <ClInclude Include="RcInputControlTask.h" />
     <ClInclude Include="ReadPwmInterrupt.h" />
     <ClInclude Include="SerialInterface.h" />
     <ClInclude Include="SteeringControl.h" />
@@ -93,9 +94,10 @@
     <ClInclude Include="__vm\.NewMotorControl.vsarduino.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="InputControlTask.cpp" />
+    <ClCompile Include="SerialInputControlTask.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="MotorControl.cpp" />
+    <ClCompile Include="RcInputControlTask.cpp" />
     <ClCompile Include="ReadPwmInterrupt.cpp" />
     <ClCompile Include="SerialInterface.cpp" />
     <ClCompile Include="SteeringControl.cpp" />

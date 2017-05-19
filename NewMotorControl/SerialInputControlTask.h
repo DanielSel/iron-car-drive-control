@@ -8,12 +8,13 @@
 namespace motorcontrol
 {
 
-class InputControlTask :
+class SerialInputControlTask :
 	public Task
 {
 public:
-	InputControlTask(MotorControl* motorControl, SteeringControl* steeringControl);
-	~InputControlTask();
+	SerialInputControlTask(MotorControl* motorControl, SteeringControl* steeringControl);
+	SerialInputControlTask(int interval, MotorControl* motorControl, SteeringControl* steeringControl);
+	~SerialInputControlTask();
 
 	void execute() override;
 	void setOverride(boolean active);

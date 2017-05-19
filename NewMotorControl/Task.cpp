@@ -8,7 +8,7 @@ Task::Task()
 	this->lastExecutionTime = -TASK_DEFAULT_INTERVAL_MS;
 }
 
-Task::Task(int interval)
+Task::Task(unsigned int interval)
 {
 	this->interval = interval;
 	this->lastExecutionTime = -interval;
@@ -19,7 +19,7 @@ Task::~Task()
 {
 }
 
-void Task::loop(int currentTime)
+void Task::loop(unsigned long currentTime)
 {
 	if (currentTime - lastExecutionTime > interval)
 	{

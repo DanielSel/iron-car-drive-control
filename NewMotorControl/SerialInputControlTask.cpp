@@ -2,12 +2,13 @@
 using namespace motorcontrol;
 
 
-SerialInputControlTask::SerialInputControlTask(MotorControl* motorControl, SteeringControl* steeringControl) : SerialInputControlTask(TASK_DEFAULT_INTERVAL_MS, motorControl, steeringControl)
+SerialInputControlTask::SerialInputControlTask(InputController* inputController, MotorControl* motorControl, SteeringControl* steeringControl) : SerialInputControlTask(inputController, motorControl, steeringControl, TASK_DEFAULT_INTERVAL_MS)
 {
 }
 
-SerialInputControlTask::SerialInputControlTask(int interval, MotorControl* motorControl, SteeringControl* steeringControl) : Task(interval)
+SerialInputControlTask::SerialInputControlTask(InputController* inputController, MotorControl* motorControl, SteeringControl* steeringControl, int interval) : Task(interval)
 {
+	this->inputController = inputController;
 	this->motorControl = motorControl;
 	this->steeringControl = steeringControl;
 }
@@ -32,7 +33,7 @@ void SerialInputControlTask::execute()
 				LOG::INFO("Received RESET Command");
 				motorControl->setPower(MOTOR_PWM_VALUE_NEUTRAL);
 				steeringControl->setPower(STEERING_PWM_VALUE_NEUTRAL);
-				setOverride(false);
+				inputController->reset();
 			}
 			else
 			{
@@ -41,12 +42,12 @@ void SerialInputControlTask::execute()
 		}
 			
 		// Only act on User Input if there is no Override by RC
-		if (!overrideFlag)
+		else if (!overrideFlag)
 		{
 			switch (controlMessage.code)
 			{
-				case CONTROL_CODE_MOTOR_POWER: motorControl->setPower(controlMessage.value); break;
-				case CONTROL_CODE_STEERING_POWER: steeringControl->setPower(controlMessage.value); break;
+			case CONTROL_CODE_MOTOR_POWER: motorControl->setPower(controlMessage.value); LOG::INFO("Executed Command to set MOTOR power to: " + static_cast<String>(controlMessage.value)); break;
+				case CONTROL_CODE_STEERING_POWER: steeringControl->setPower(controlMessage.value); LOG::INFO("Executed Command to set STEERING power to: " + static_cast<String>(controlMessage.value)); break;
 				default: LOG::WARNING("Received Message with unknown Control Code: " + static_cast<String>(controlMessage.code));
 			}
 		}
@@ -57,4 +58,5 @@ void SerialInputControlTask::execute()
 void SerialInputControlTask::setOverride(boolean active)
 {
 	overrideFlag = active;
+	LOG::DEBUG("Override: " + static_cast<String>(active));
 }

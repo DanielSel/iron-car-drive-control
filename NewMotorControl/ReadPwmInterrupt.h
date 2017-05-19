@@ -10,7 +10,7 @@ namespace motorcontrol
 class ReadPwmInterrupt
 {
 public:
-	ReadPwmInterrupt(int pwmPin, volatile int* pwmValue);
+	ReadPwmInterrupt(int pwmPin, volatile unsigned long* pwmValue);
 	~ReadPwmInterrupt();
 
 	static void handleInterruptRising();
@@ -22,7 +22,7 @@ private:
 	void handlePwmPinFalling();
 
 	int pwmPin;
-	volatile int* pwmValue;
+	volatile unsigned long* pwmValue;
 	volatile unsigned long prevTime;
 };
 

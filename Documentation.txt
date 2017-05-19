@@ -40,7 +40,7 @@ Input Control
 * Reacts to Control Messages from User with 5Hz (every 200ms)
 * Reacts to Remote Control with 50Hz (every 20ms)
 * Obeys Input Control Messages over Serial Interface as long as there is no / neutral input signal from RC.
-* If RC is used it overrides User Input until RESET command is sent.
+* If RC is used it overrides User Input until RC returns to neutral or RESET command is sent.
 
 --------------------------------------------------
 Internal Details

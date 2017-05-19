@@ -14,6 +14,7 @@
 #include "SerialInterface.h"
 #include "MotorControl.h"
 #include "SteeringControl.h"
+#include "InputController.h"
 
 // Tasks & Interrupts
 #include "Task.h"
@@ -21,8 +22,8 @@
 #include "RcInputControlTask.h"
 #include "ReadPwmInterrupt.h"
 
-
 using namespace motorcontrol;
+
 
 // PIN Definitions
 #define RC_INPUT_MOTOR_PIN 12
@@ -30,18 +31,20 @@ using namespace motorcontrol;
 #define MOTOR_OUTPUT_PIN 10
 #define STEERING_OUTPUT_PIN 9
 
+// Input Controller
+InputController* inputController;
+
 // Task Definitions
 SerialInputControlTask* serialInputControlTask;
 RcInputControlTask* rcInputControlTask;
-
 
 // Interrupt Definitions
 ReadPwmInterrupt* readRcMotorPwm;
 ReadPwmInterrupt* readRcSteeringPwm;
 
 // Input PWM Signals
-volatile int rcMotorPwmValue;
-volatile int rcSteeringPwmValue;
+volatile unsigned long rcMotorPwmValue;
+volatile unsigned long rcSteeringPwmValue;
 
 
 // the setup function runs once when you press reset or power the board
@@ -60,9 +63,12 @@ void setup() {
 	MotorControl* motorControl = new MotorControl(MOTOR_OUTPUT_PIN);
 	SteeringControl* steeringControl = new SteeringControl(STEERING_OUTPUT_PIN);
 
-	// Create Input Control Tasks
-	serialInputControlTask = new SerialInputControlTask(200, motorControl, steeringControl);
-	rcInputControlTask = new RcInputControlTask(&rcMotorPwmValue, &rcSteeringPwmValue, 20, motorControl, steeringControl, serialInputControlTask);
+	// Setup Input Control
+	inputController = new InputController();
+	serialInputControlTask = new SerialInputControlTask(inputController, motorControl, steeringControl, 200);
+	rcInputControlTask = new RcInputControlTask(&rcMotorPwmValue, &rcSteeringPwmValue, inputController, motorControl, steeringControl, 20);
+	inputController->setSerialInputControlTask(serialInputControlTask);
+	inputController->setRcInputControlTask(rcInputControlTask);
 
 	// Attach PWM Interrupts
 	readRcMotorPwm = new ReadPwmInterrupt(RC_INPUT_MOTOR_PIN, &rcMotorPwmValue);
@@ -71,7 +77,7 @@ void setup() {
 
 // the loop function runs over and over again until power down or reset
 void loop() {
-	int time = millis();
+	unsigned long time = millis();
 	serialInputControlTask->loop(time);
 	rcInputControlTask->loop(time);
 	debugLoop(time);
@@ -81,9 +87,9 @@ void loop() {
 // DEBUG STUFF
 // ------------------
 
-void debugLoop(int time)
+void debugLoop(unsigned long time)
 {
-  static int lastExecutionTime = 0;
+  static unsigned long lastExecutionTime = 0;
   if (time - lastExecutionTime > 500)
   {
     Serial.println("PWM Motor: " + static_cast<String>(rcMotorPwmValue));

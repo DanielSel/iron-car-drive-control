@@ -3,24 +3,24 @@
 namespace motorcontrol
 {
 
-const int TASK_DEFAULT_INTERVAL_MS = 200;
+const unsigned int TASK_DEFAULT_INTERVAL_MS = 200;
 
 class Task
 {
 public:
 	Task();
-	Task(int interval);
+	Task(unsigned int interval);
 	~Task();
 
-	void loop(int currentTime);
+	void loop(unsigned long currentTime);
 
 protected:
 	virtual void execute();
 
 
 private:
-	int interval;
-	int lastExecutionTime;
+	unsigned int interval;
+	unsigned long lastExecutionTime;
 
 };
 

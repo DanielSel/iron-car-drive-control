@@ -2,7 +2,7 @@
 using namespace motorcontrol;
 
 
-ReadPwmInterrupt::ReadPwmInterrupt(int pwmPin, volatile int* pwmValue)
+ReadPwmInterrupt::ReadPwmInterrupt(int pwmPin, volatile unsigned long* pwmValue)
 {
 	this->pwmPin = pwmPin;
 	this->pwmValue = pwmValue;

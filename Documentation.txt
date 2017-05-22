@@ -4,20 +4,18 @@ Documentation Notes:
 Wiring
 --------------------------------------------------
 RC -> Arduino
-GND -> GND (Grey Cable soldered to Violet cable )
-5V -> 5V (Grey Cable)
-Servo (1CH) -> Pin D11 (Green Cable)
-Motor (2CH) -> Pin D12 (Blue Cable)
+GND -> GND (Black Cable [part of 3-pin connector])
+5V -> 5V (Red Cable [part of 3-pin connector])
+Servo (1CH) -> Pin D11 (White Cable [part of 3-pin connector])
+Motor (2CH) -> Pin D12 (Yellow cable)
 
 Arduino -> Servo
-GND -> GND (Red Cable)
-5V -> 5V (Black Cable)
-Pind D09 -> Servo Input
-
+Pind D09 -> Servo Input (Oragne Cable)
 
 Arduino -> Motor
-Pin D10 -> ESC (Lonely Blue Cable)
-[ESC gets power from Battery and forwards to RC, which in turn forwards to Arduino]
+Pin D10 -> ESC (Green Cable)
+
+Power Supply: ESC gets power from Battery and forwards to RC, which in turn forwards to Arduino & Servo via 3-pin connector.
 
 --------------------------------------------------
 Serial Communication Protocol
@@ -52,6 +50,14 @@ Internal Details
     * NOTE: Only use DEBUG and TRACE if you are trying to find an error. Sending many messages over Serial greatly impacts performance and stability!
 
 --------------------------------------------------
+Limitations / TODO
+--------------------------------------------------
+* 8-bit PWM Signal (low resolution)
+* Hall Sensors
+* Ultrasonic
+* RaspberryPi Interface
+
+--------------------------------------------------
 Tips and Tricks
 --------------------------------------------------
 * Many librarys are bad implementations and cause lots of trouble. Do reasearch on libraries before using them and include as few as possible
@@ -59,4 +65,5 @@ Tips and Tricks
 * Don't let tasks in loops run more often then necessary. Example: RC Input is a 50Hz PWM signal. Running the RC input task more than 20 times per second does not bring any extra performance, but costs ressources
 * Serial Communication is very expensive. If you are sending a lot of debug messages, you might be causing the problem in the first place
 * When implementing a new feature, write an extra sketch with a minimal implementation of only that feature first
-* This arduino model allows only ONE interrupt on a PIN at the same time. Subsequent interrupt attachments will overwrite the previous ones
+* This arduino model used in the car allows only ONE interrupt on a PIN at the same time. Subsequent interrupt attachments will overwrite the previous ones
+* If the battery is almost empty (or some device doesn't receive enough power for any reason), very strange things start to happen...

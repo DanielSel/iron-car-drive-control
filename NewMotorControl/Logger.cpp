@@ -15,47 +15,47 @@ Logger * Logger::INSTANCE()
 	return &instance;
 }
 
-void Logger::INITIALIZE(int logLevel)
+void Logger::INITIALIZE(LogLevel logLevel)
 {
 	Logger::INSTANCE()->initialize(logLevel);
 }
 
-void Logger::LOG_MESSAGE(int logLevel, String message)
+void Logger::LOG_MESSAGE(LogLevel logLevel, String message)
 {
 	Logger::INSTANCE()->logMessage(logLevel, message);
 }
 
 void Logger::CRITICAL(String message)
 {
-	LOG_MESSAGE(LOG_LEVEL_CRITICAL, "CRITICAL: " + message);
+	LOG_MESSAGE(LogLevel::CRITICAL, "CRITICAL: " + message);
 }
 
 void Logger::ERROR(String message)
 {
-	LOG_MESSAGE(LOG_LEVEL_ERROR, "ERROR: " + message);
+	LOG_MESSAGE(LogLevel::ERROR, "ERROR: " + message);
 }
 
 void Logger::WARNING(String message)
 {
-	LOG_MESSAGE(LOG_LEVEL_WARNING, "WARNING: " + message);
+	LOG_MESSAGE(LogLevel::WARNING, "WARNING: " + message);
 }
 
 void Logger::INFO(String message)
 {
-	LOG_MESSAGE(LOG_LEVEL_INFO, "INFO: " + message);
+	LOG_MESSAGE(LogLevel::INFO, "INFO: " + message);
 }
 
 void Logger::DEBUG(String message)
 {
-	LOG_MESSAGE(LOG_LEVEL_DEBUG, "DEBUG: " + message);
+	LOG_MESSAGE(LogLevel::DEBUG, "DEBUG: " + message);
 }
 
 void Logger::TRACE(String message)
 {
-	LOG_MESSAGE(LOG_LEVEL_TRACE, "TRACE: " + message);
+	LOG_MESSAGE(LogLevel::TRACE, "TRACE: " + message);
 }
 
-void Logger::initialize(int logLevel)
+void Logger::initialize(LogLevel logLevel)
 {
 	if (!initialized)
 	{
@@ -69,9 +69,9 @@ void Logger::initialize(int logLevel)
 	}
 }
 
-void Logger::logMessage(int logLevel, String message)
+void Logger::logMessage(LogLevel logLevel, String message)
 {
-	if (this->initialized && logLevel >= this->logLevel)
+	if (this->initialized && logLevel <= this->logLevel)
 	{
 		SerialInterface::writeMessage(message);
 	}

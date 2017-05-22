@@ -5,20 +5,17 @@
 #include "SerialInterface.h"
 
 #define LOG Logger
+#define LOGLEVEL LogLevel
 
 namespace motorcontrol
 {
-	const int LOG_LEVEL_CRITICAL = 5;
-	const int LOG_LEVEL_ERROR = 4;
-	const int LOG_LEVEL_WARNING = 3;
-	const int LOG_LEVEL_INFO = 2;
-	const int LOG_LEVEL_DEBUG = 1;
-	const int LOG_LEVEL_TRACE = 0;
+
+enum LogLevel {CRITICAL, ERROR, WARNING, INFO, DEBUG, TRACE};
 
 class Logger
 {
 public:
-	static void INITIALIZE(int logLevel);
+	static void INITIALIZE(LogLevel logLevel);
 
 	static void CRITICAL(String message);
 	static void ERROR(String message);
@@ -28,17 +25,17 @@ public:
 	static void TRACE(String message);
 
 	~Logger();
-
+	
 private:
 	static Logger* INSTANCE();
-	static void LOG_MESSAGE(int logLevel, String message);
+	static void LOG_MESSAGE(LogLevel logLevel, String message);
 	
 	boolean initialized;
 	int logLevel;
 
 	Logger();
-	void initialize(int logLevel);
-	void logMessage(int logLevel, String message);
+	void initialize(LogLevel logLevel);
+	void logMessage(LogLevel logLevel, String message);
 };
 
 }

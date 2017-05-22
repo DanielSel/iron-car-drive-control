@@ -52,11 +52,16 @@ void SerialInputControlTask::execute()
 			}
 		}
 
+		else if (overrideFlag)
+		{
+			LOG::INFO("Override from Remote Control is active");
+		}
+
 	}
 }
 
 void SerialInputControlTask::setOverride(boolean active)
 {
 	overrideFlag = active;
-	LOG::DEBUG("Override: " + static_cast<String>(active));
+	LOG::DEBUG("Override: " + overrideFlag ? "On" : "Off");
 }

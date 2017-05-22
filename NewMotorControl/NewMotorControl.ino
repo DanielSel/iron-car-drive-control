@@ -50,7 +50,7 @@ volatile unsigned long rcSteeringPwmValue;
 // the setup function runs once when you press reset or power the board
 void setup() {
 	// Initialize Logging and Serial Communication
-	LOG::INITIALIZE(LOG_LEVEL_DEBUG);
+	LOG::INITIALIZE(LOGLEVEL::INFO);
 	SerialInterface::initialize(19200);
 
 	// Setup Pins
@@ -73,6 +73,10 @@ void setup() {
 	// Attach PWM Interrupts
 	readRcMotorPwm = new ReadPwmInterrupt(RC_INPUT_MOTOR_PIN, &rcMotorPwmValue);
 	readRcSteeringPwm = new ReadPwmInterrupt(RC_INPUT_STEERING_PIN, &rcSteeringPwmValue);
+
+	// Reset Input Controller to finish initialization
+	inputController->reset();
+	LOG::INFO("ECU initialized.");
 }
 
 // the loop function runs over and over again until power down or reset
@@ -80,7 +84,7 @@ void loop() {
 	unsigned long time = millis();
 	serialInputControlTask->loop(time);
 	rcInputControlTask->loop(time);
-	debugLoop(time);
+	//debugLoop(time);
 }
 
 // ------------------

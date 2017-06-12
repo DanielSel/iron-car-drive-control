@@ -1,24 +1,22 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.9
+VisualStudioVersion = 15.0.26430.6
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OLD_PWMSignalCode", "OLD_PWMSignalCode\OLD_PWMSignalCode.vcxproj", "{C5F80730-F44F-4478-BDAE-6634EFC2CA88}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NewMotorControl", "NewMotorControl\NewMotorControl.vcxproj", "{33E87AD4-CDC5-4927-AF04-2CA3AF9B35B2}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DriveControl.Arduino", "DriveControl.Arduino\DriveControl.Arduino.vcxproj", "{33E87AD4-CDC5-4927-AF04-2CA3AF9B35B2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
 		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C5F80730-F44F-4478-BDAE-6634EFC2CA88}.Debug|x86.ActiveCfg = Debug|Win32
-		{C5F80730-F44F-4478-BDAE-6634EFC2CA88}.Debug|x86.Build.0 = Debug|Win32
-		{C5F80730-F44F-4478-BDAE-6634EFC2CA88}.Release|x86.ActiveCfg = Release|Win32
-		{C5F80730-F44F-4478-BDAE-6634EFC2CA88}.Release|x86.Build.0 = Release|Win32
+		{33E87AD4-CDC5-4927-AF04-2CA3AF9B35B2}.Debug|Any CPU.ActiveCfg = Debug|Win32
 		{33E87AD4-CDC5-4927-AF04-2CA3AF9B35B2}.Debug|x86.ActiveCfg = Debug|Win32
 		{33E87AD4-CDC5-4927-AF04-2CA3AF9B35B2}.Debug|x86.Build.0 = Debug|Win32
+		{33E87AD4-CDC5-4927-AF04-2CA3AF9B35B2}.Release|Any CPU.ActiveCfg = Release|Win32
 		{33E87AD4-CDC5-4927-AF04-2CA3AF9B35B2}.Release|x86.ActiveCfg = Release|Win32
 		{33E87AD4-CDC5-4927-AF04-2CA3AF9B35B2}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection

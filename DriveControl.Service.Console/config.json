@@ -1,0 +1,6 @@
+﻿{
+  "SerialInterface": {
+    "Port": "COM3",
+    "Baudrate": 19200
+  }
+}

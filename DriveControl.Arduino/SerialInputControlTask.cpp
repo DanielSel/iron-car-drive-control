@@ -46,8 +46,9 @@ void SerialInputControlTask::execute()
 		{
 			switch (controlMessage.code)
 			{
-			case CONTROL_CODE_MOTOR_POWER: motorControl->setPower(controlMessage.value); LOG::INFO("Executed Command to set MOTOR power to: " + static_cast<String>(controlMessage.value)); break;
+				case CONTROL_CODE_MOTOR_POWER: motorControl->setPower(controlMessage.value); LOG::INFO("Executed Command to set MOTOR power to: " + static_cast<String>(controlMessage.value)); break;
 				case CONTROL_CODE_STEERING_POWER: steeringControl->setPower(controlMessage.value); LOG::INFO("Executed Command to set STEERING power to: " + static_cast<String>(controlMessage.value)); break;
+				case CONTROL_CODE_DEMO: inputController->setDemoTaskScenario(controlMessage.value); LOG::INFO("Next Demo Scenario set to: " + static_cast<String>(controlMessage.value)); break;
 				default: LOG::WARNING("Received Message with unknown Control Code: " + static_cast<String>(controlMessage.code));
 			}
 		}

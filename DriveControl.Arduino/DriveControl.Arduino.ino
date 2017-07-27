@@ -21,6 +21,7 @@
 #include "SerialInputControlTask.h"
 #include "RcInputControlTask.h"
 #include "ReadPwmInterrupt.h"
+#include "DemoTask.h"
 
 using namespace motorcontrol;
 
@@ -37,6 +38,7 @@ InputController* inputController;
 // Task Definitions
 SerialInputControlTask* serialInputControlTask;
 RcInputControlTask* rcInputControlTask;
+DemoTask* demoTask;
 
 // Interrupt Definitions
 ReadPwmInterrupt* readRcMotorPwm;
@@ -74,6 +76,10 @@ void setup() {
 	readRcMotorPwm = new ReadPwmInterrupt(RC_INPUT_MOTOR_PIN, &rcMotorPwmValue);
 	readRcSteeringPwm = new ReadPwmInterrupt(RC_INPUT_STEERING_PIN, &rcSteeringPwmValue);
 
+	// Demo Task
+	demoTask = new DemoTask(motorControl, steeringControl, 7000);
+	inputController->setDemoTask(demoTask);
+
 	// Reset Input Controller to finish initialization
 	inputController->reset();
 	LOG::INFO("ECU initialized.");
@@ -84,6 +90,7 @@ void loop() {
 	unsigned long time = millis();
 	serialInputControlTask->loop(time);
 	rcInputControlTask->loop(time);
+	demoTask->loop(time);
 	//debugLoop(time);
 }
 
